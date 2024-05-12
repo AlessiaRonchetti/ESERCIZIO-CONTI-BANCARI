@@ -1,0 +1,36 @@
+public class ContoCorrentePrivato extends ContoCorrente{
+
+    protected String nome;
+    protected String cognome;
+    protected String codiceFiscale;
+
+    public ContoCorrentePrivato(String IBAN, double saldo, int conteggioMovimenti, String nome, String cognome, String codiceFiscale){
+        super(IBAN, saldo, conteggioMovimenti);
+        this.nome = nome;
+        this.cognome = cognome;
+        this.codiceFiscale = codiceFiscale;
+    }
+
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getCognome(){
+        return cognome;
+    }
+    
+    public String getCodiceFisclae(){
+        return codiceFiscale;
+    }
+
+
+
+    
+    public void stampaInfo(){
+
+        System.out.println("Il tuo IBAN è :" + getIBAN() + ". Il tuo saldo è: " + getSaldo() + ". Hai effettuato: " + getConteggioMovimenti() + " movimenti.");
+    
+        System.out.println("Il conto corrente è di: " + getNome() + " " + getCognome() + ", " + getCodiceFisclae() + ".");
+    }
+}
