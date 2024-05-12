@@ -1,0 +1,26 @@
+public class ContoCorrenteGiuridico extends ContoCorrente{
+
+    protected String pIVA;
+    protected String ragioneSociale;
+
+    public ContoCorrenteGiuridico(String IBAN, double saldo, int conteggioMovimenti, String pIVA, String ragioneSociale){
+        super(IBAN, saldo, conteggioMovimenti);
+        this.pIVA = pIVA;
+        this.ragioneSociale = ragioneSociale;
+    }
+
+    public String getPIVA(){
+        return pIVA;
+    }
+
+    public String getRagioneSociale() {
+        return ragioneSociale;
+    }
+
+    public void stampaInfo(){
+
+        System.out.println("Il tuo IBAN è :" + getIBAN() + ". Il tuo saldo è: " + getSaldo() + ". Hai effettuato: " + getConteggioMovimenti() + " movimenti.");
+    
+        System.out.println("Il conto ha pIVa di: " + getPIVA() + ". La ragione sociale è: " + getRagioneSociale() + ".");
+    }
+}
