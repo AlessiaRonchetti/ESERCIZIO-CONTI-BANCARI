@@ -1,0 +1,57 @@
+public class ContoCorrente{
+
+    //inizializzo i vari attributi che mi descrivono la classe 
+    private String IBAN;
+    private double saldo;
+    private int conteggioMovimenti;
+
+
+    //creo il costruttore del conto corrente 
+    public ContoCorrente(String IBAN, double saldo, int conteggioMovimenti){
+
+        this.IBAN = IBAN;
+        this.saldo = saldo;
+        this.conteggioMovimenti = conteggioMovimenti;
+    }
+
+    public String getIBAN(){
+       return IBAN; 
+    }
+
+    public double getSaldo(){
+        return saldo;
+    }
+
+    public void setSaldo(double nuovoSaldo){
+        this.saldo = nuovoSaldo;
+    }
+
+    public int getConteggioMovimenti(){
+        return conteggioMovimenti;
+    }
+
+    public void versamento(double saldoInserito){
+        double nuovoSaldo = 0;
+        nuovoSaldo = getSaldo() + saldoInserito;
+        setSaldo(nuovoSaldo);
+        conteggioMovimenti ++;
+    }
+
+    public void prelievo(double soldiPrelevati){
+        double nuovoSaldo = 0;
+
+    if(getSaldo() >= soldiPrelevati){
+        nuovoSaldo = getSaldo() - soldiPrelevati;
+        setSaldo(nuovoSaldo);
+        conteggioMovimenti++;
+    
+    }else{
+        System.out.println("Il saldo non è sufficiente per il prelievo che vuole effettuare.");
+    }
+}
+    public void stampaInfo(){
+        System.out.println("Il tuo IBAN è :" + getIBAN() + ". Il tuo saldo è: " + getSaldo() + ". Hai effettuato: " + getConteggioMovimenti() + " movimenti.");
+    }
+
+    //La parte del conteggio movimenti andrebbe implementata con una serie di condizioni, quali inserimento di una variabile temporale importando il LocalDateTime per poter dare un massimo di movimenti effettuabili.
+}
