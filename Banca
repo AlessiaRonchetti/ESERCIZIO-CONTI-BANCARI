@@ -4,13 +4,10 @@ public class Banca {
 
     private String nome;
     private ArrayList<ContoCorrente> conti;
-    private ArrayList<ContoCorrentePrivato> contiPrivati;
-    private ArrayList<ContoCorrenteGiuridico> contiGiuridici;
 
     public Banca(String nome, ArrayList<ContoCorrente> conti) {
         this.nome = nome;
-        this.conti = conti;
-
+        this.conti = new ArrayList<>();
     }
 
     public void inserisciConto(ContoCorrente c) {
@@ -18,50 +15,43 @@ public class Banca {
     }
 
     public void cancellaConto(String I) {
-
-        for (ContoCorrente c : conti) {
-            if (c.getIBAN().equals(I)) {
-                conti.remove(c);
+        for (int i = 0; i < conti.size(); i++) {
+            if (conti.get(i).getIBAN().equals(I)) {
+                conti.remove(i);
+                break; // exit loop after removal
             }
         }
-
     }
 
     public boolean cercaConto(String parametro1, String parametro2) {
-
         for (ContoCorrente c : conti) {
             if (c instanceof ContoCorrentePrivato) {
-                if (cp.getNome().equals(parametro1) && cp.getCognome().equals(parametro2)) {
+                ContoCorrentePrivato ccp = (ContoCorrentePrivato) c;
+                if (ccp.getNome().equals(parametro1) && ccp.getCognome().equals(parametro2)) {
                     return true;
                 }
             } else if (c instanceof ContoCorrenteGiuridico) {
-                if (cg.getPIVA().equals(parametro1) && cg.getRagioneSociale().equals(parametro2)) {
+                ContoCorrenteGiuridico ccg = (ContoCorrenteGiuridico) c;
+                if (ccg.getPIVA().equals(parametro1) && ccg.getRagioneSociale().equals(parametro2)) {
                     return true;
                 }
-
-            } else {
-                System.out.println("Conto corrente non trovato.");
-                return false;
             }
         }
+        System.out.println("Conto corrente non trovato.");
+        return false;
     }
 
     public double totaleSaldi() {
-
         double tot = 0;
-        for (int i = 0; i < conti.size(); i++) {
-            tot += conti.get(i).getSaldo();
+        for (ContoCorrente c : conti) {
+            tot += c.getSaldo();
         }
-
         return tot;
-
     }
 
     public void stampaInfoConti() {
-
-        for (int i = 0; i < conti.size(); i++) {
-            conti.get(i).stampaInfo();
+        for (ContoCorrente c : conti) {
+            c.stampaInfo();
         }
     }
-
 }
